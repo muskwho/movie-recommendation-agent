@@ -1,66 +1,135 @@
-🎬 Movie Recommendation Agent (Genre-Based AI Multi-Agent System)
+**CineMate — AI Movie Recommendation Agent**
 
-This project is a genre-based movie recommendation agent built as a capstone submission for the "AI Agents" course.  
-It is a lightweight AI system that uses **multi-agent architecture**, **custom tools**, and **memory** to deliver smart movie suggestions based on user preferences.
+A multi-agent, tool-driven system that recommends movies based on user genres and preferences, powered by a curated dataset, LLM reasoning, and lightweight memory.
 
-The agent can:
-- Understand the user’s movie request (genre, mood, vibe, style).
-- Retrieve matching movies from a local dataset.
-- Provide recommendations in a friendly, conversational style.
-- Run locally through VS Code using Python.
+CineMate helps users instantly discover movies tailored to their tastes. Instead of scrolling endlessly through streaming platforms, users simply describe the genre or mood they want — and the agent provides curated, intelligent recommendations. The system uses a structured dataset, a multi-agent pipeline, and an optional UI for smooth interaction.
 
----
+⭐ Key Features
 
-🚀 Project Purpose
+🎯 Multi-Agent Architecture
 
-Many people struggle to choose what movie to watch. Manually searching across platforms wastes time and often results in poor choices.
+A pipeline of specialized agents, each responsible for one stage of reasoning:
 
-This project solves that problem by building a **personal movie concierge agent** that recommends films instantly based on genre preferences.
+Query Agent — interprets user input, extracts genre/mood, normalizes the query
 
----
+Genre Filter Agent — retrieves matching movies from the dataset
+
+Recommendation Agent (LLM) — ranks, refines, and explains recommendations
+
+Memory Agent — stores user preferences across a session
+
+🛠️ Custom Tools & Data Handling
+
+Local JSON movie dataset (movies_250.json)
+
+Custom Python filtering functions
+
+Modular design (easy to extend with APIs like TMDB/IMDB later)
+
+🧠 Memory & Session Management
+
+Remembers previously chosen genres
+
+Adapts future recommendations
+
+Lightweight memory stored as JSON
+
+🔄 Context Engineering & Logging
+
+Query cleaning + context compression
+
+Simple logging for debugging and observability
+
+🖥️ Dual Interface Support
+
+Command-line (Python) — run directly through VS Code
+
+Optional Streamlit UI — more interactive browsing
+
+📁 Clean and Extensible Project Structure
+
+Easy to update the dataset
+
+Swap out agents or add new ones without breaking the system
+
+🚀 Purpose
+
+Choosing a movie is surprisingly difficult — people spend minutes (sometimes hours) bouncing across apps, reading reviews, and making unsatisfying choices.
+
+CineMate solves this by acting as a personal movie concierge, reducing decision time and giving high-quality recommendations instantly.
 
 🧠 Agent Architecture
 
-This project uses a **multi-agent design**:
+CineMate uses a multi-agent pipeline, where each agent performs one well-defined role.
 
-1. User Query Agent (LLM Agent)**
-- Understands user input  
-- Extracts genre and additional filters  
-- Interprets unclear queries  
-- Passes cleaned query to next agent  
+1. Query Agent (LLM Agent)
 
-2. Genre Recommendation Agent**
-- Reads local `movies_250.json`  
-- Filters based on selected genre  
-- Returns a list of matching films  
-- Acts as the “search engine” of the system  
+Interprets user input
 
-3. Response Formatting Agent (LLM Agent)**
-- Converts raw movie list into  
-  - Friendly recommendations  
-  - Watch-order suggestions  
-  - Optional summaries  
+Extracts genres, moods, keywords
 
----
+Handles vague or ambiguous queries
 
- 🛠️ Tools & Concepts Implemented
+Normalizes context before passing it forward
 
-This project includes **more than the required 3 capstone concepts**:
+2. Genre Filter Agent (Retrieval Agent)
 
- ✔ Multi-Agent System
-- LLM-powered Query Agent  
-- Retrieval Agent  
-- Output Formatting Agent  
+Reads from movies_250.json
 
- ✔ Custom Tools
-- Custom Movie Search Tool  
-- Local JSON dataset tool  
+Filters by:
 
- ✔ Sessions & Memory
-- User session context preserved  
-- Preferences kept inside memory  
+Primary genre
 
- ✔ Context Engineering
-- The query is compressed before passing to agents  
-- Reduces token use and increases accuracy  
+Optional keywords
+
+Year or rating (if user mentions them)
+
+Returns a candidate movie list
+
+3. Recommendation Agent (LLM)
+
+Ranks movies
+
+Formats them into conversational output
+
+Can generate:
+
+Top picks
+
+Mood-specific suggestions
+
+Summaries or reasons to watch
+
+4. Memory Agent
+
+Stores last requested genre
+
+Tracks user tendencies
+
+Improves recommendations within the same session
+
+📂 Dataset
+
+The movies_250.json dataset contains 250 hand-curated movies across genres:
+
+Action
+
+Sci-Fi
+
+Comedy
+
+Romance
+
+Thriller
+
+Horror
+
+Animation
+
+Drama
+
+Each movie includes:
+title, genre, year, rating, summary, director, cast, enabling rich reasoning in a small dataset.
+
+This dataset is intentionally lightweight — perfect for local agent experimentation.
 
